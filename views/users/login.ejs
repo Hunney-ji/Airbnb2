@@ -1,0 +1,23 @@
+<%-layout("./layouts/boilerplates")%>
+<div class="alert alert-danger" role="alert">
+    You must be loggedin for This
+  </div>
+<body>
+    <form method="POST" action="/login" class="need-validation" >
+        <div class="row">
+            <div class="col-8 offset-2">
+                <h3>Login</h3>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input name="username" id="username" type="text" class="form-control" required />
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">password</label>
+                    <input name="password" id="password"  type="password" class="form-control"  required/>
+                </div>
+                <button class="btn btn-success">Login</button>
+            </div>
+        </div>
+    </form>
+    
+</body>

@@ -1,0 +1,27 @@
+<%-layout("./layouts/boilerplates")%>
+<body>
+    
+    <form method="POST" action="/signup" class="need-validation" >
+        <div class="row">
+            <div class="col-8 offset-2">
+                <h3>Create a new Account</h3>
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input name="username" id="username" type="text" class="form-control" required />
+                    
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input name="email" id="email"  type="email" class="form-control" required></input>
+                    <div class="valid-feedback">Looks good</div>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">password</label>
+                    <input name="password" id="password"  type="password" class="form-control"  required/>
+                </div>
+                <button class="btn btn-success">Create</button>
+            </div>
+        </div>
+    </form>
+    
+</body>

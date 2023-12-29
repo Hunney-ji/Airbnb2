@@ -1,0 +1,37 @@
+<%-layout("./layouts/boilerplates")%>
+<body>
+    <form method="POST" action="/listings/<%=Listing._id %>?_method=PUT" class="need-validation" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-8 offset-2">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input name="listing[title]" value="<%= Listing.title%>" type="text" class="form-control" required/>
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea name="listing[description]"  type="text" class="form-control" required ><%= Listing.description%></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Image</label>
+                    <input name="listing[image]" type="file" class="form-control" required/>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="price" class="form-label">Price</label>
+                        <input name="listing[price]" value="<%= Listing.price%>" type="number" class="form-control" required/>
+                    </div>
+                    <div class="mb-3 col-md-8">
+                        <label for="country" class="form-label">Country</label>
+                        <input name="listing[country]" value="<%= Listing.country%>" type="text" class="form-control" required/>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="location" class="form-label">Location</label>
+                    <input name="listing[location]" value="<%= Listing.location%>" type="text" class="form-control" required/>
+                </div>
+                <button class="btn btn-dark">Edit</button>
+            </div>
+        </div>
+    </form>
+</body>

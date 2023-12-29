@@ -1,0 +1,87 @@
+<% layout("/layouts/boilerplates")%>
+<body>
+    <div class="row">
+        <div class="col-8 offset-3">
+            <h3><b><%=Listing.title%></b></h3>
+            <div class="card col-6">
+                <img src="<%=Listing.image.url%>" class="card-img-top show-img" alt="...">
+                <div class="card-body">
+                <p class="card-text">
+                    <ul>
+                        <li><%=Listing.title%></li>
+                        <li><%=Listing.description%></li>
+                        <li>&#8377;<%=Listing.price.toLocaleString("en-IN")%></li>
+                        <li><%=Listing.location%></li>
+                        <li><%=Listing.country%></li>
+                    </ul>
+                
+                </p>
+                </div>
+            </div>
+            <% if((currUser)&& Listing.owners[0]!=""){%>    
+            <% try{if(currUser._id.equals(Listing.owners[0]._id)){%>
+            <div class="col">
+                <a href="/listings/<%=Listing._id%>/edit" class="btn btn-dark col-3 mb-3">Edit </a>
+                <form method="POST" action="/listings/<%= Listing._id%>?_method=Delete">
+                <button class="btn btn-dark col-3">Delete</button>
+                </form>
+            </div>
+            <%}}catch(err){%>
+            <%}%>
+            <%}%>
+            <hr>
+
+            <p><b>All reviews</b></p>
+            <% for(review of Listing.reviews){%>
+            <div class="comment col-8  mb-3">
+                <div class="card-body mb-2 ms-2">
+                    <h5 class="card-title">@<%=review.author.username%></h5>
+                    <p class="card-text"><%=review.comment%></p>
+                    <p class="starability-result card-text" data-rating="<%=review.rating%>">
+                        Rated: 3 stars
+                      </p>
+                    <% if(currUser){try{ if(currUser._id.equals(review.author._id)){%>
+                    <form action="/listings/<%=Listing._id%>/reviews/<%=review._id%>?_method=Delete" method="POST">
+                        <button class="btn btn-outline-dark">Delete</button>
+                    </form>
+                    <%}}catch{}%>
+                    <%}%>
+                </div>
+        </div>
+            <%}%>
+            
+        </div>
+       
+        <div class="col-8 offset-3"> 
+            <hr>
+            <h4>Leave a Rating</h4>
+            <div class="mt-3 mb-3 ">
+            <form action="/listings/<%= Listing._id %>/reviews" method="POST" class="need-validation">
+                <label class="form-label" >Rating</label>
+                <fieldset class="starability-slot">
+                    <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="3" checked aria-label="No rating." />
+                    <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                    <label for="first-rate1" title="Terrible">1 star</label>
+                    <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                    <label for="first-rate2" title="Not good">2 stars</label>
+                    <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                    <label for="first-rate3" title="Average">3 stars</label>
+                    <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                    <label for="first-rate4" title="Very good">4 stars</label>
+                    <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                    <label for="first-rate5" title="Amazing">5 stars</label>
+                    </fieldset>
+                <label class="form-label" >comment</label>
+                <textarea name="review[comment]" type="range" min="1" max="5" class="form-control mb-2" required></textarea>
+                <% if(currUser){%>
+                <button class="btn btn-outline-dark">Submit</button>
+                <%}%>
+            </form>
+            
+            </div>
+        </div>
+            
+    </div>
+    
+    
+</body>
